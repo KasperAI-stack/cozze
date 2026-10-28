@@ -6,8 +6,8 @@ En personlig landingpage til ansøgningen som marketingkoordinator i Cozzes mark
 
 - site/: selve hjemmesiden. Det er kun denne mappe, der kommer online.
   - index.html: forsiden med al teksten
-  - cv.html og ansoegning.html: midlertidige sider, indtil CV og ansøgning til Cozze er klar som PDF. Så bygges de op som PDF'erne, og PDF'erne lægges i assets/pdf/.
-  - css/dokument.css: designet til CV og ansøgning (bruges, når de rigtige sider bygges)
+  - cv.html og ansoegning.html: CV'et og ansøgningen bygget op som PDF'erne i assets/pdf/. Ret teksten begge steder.
+  - css/dokument.css: designet til CV og ansøgning (Barlow og Barlow Condensed, farverne fra PDF'erne)
   - en/: de engelske udgaver (index.html, cv.html og application.html). Sprogvælgeren DA/EN i toppen skifter mellem dem. Ret teksten på begge sprog, når noget ændres.
   - 404.html: siden, der vises, hvis adressen er forkert
   - css/styles.css: farver og design. Cozzes farver (petrol #274345 og limegrøn #C4C969) står øverst under `:root`.

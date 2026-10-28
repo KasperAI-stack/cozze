@@ -1,52 +1,66 @@
 /* CV og ansøgning: de to PDF-dokumenter bygget som websider. De står altid i lyst tema, ligesom PDF'erne,
-   og bruger samme skrifter: Arimo i CV'et og Inter i ansøgningen. Toppen og knapperne kommer fra styles.css. */
+   og bruger samme skrifter: Barlow til teksten og Barlow Condensed til overskrifterne. Toppen og knapperne
+   kommer fra styles.css. */
 
-/* Arimo har samme mål som Arial. Licens: Apache 2.0, se /fonts/LICENSE-arimo.txt. */
+/* Barlow og Barlow Condensed ligger selv på siden. Licens: SIL Open Font License, se /fonts/OFL-barlow.txt. */
 @font-face {
-  font-family: "Arimo";
+  font-family: "Barlow";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/arimo-latin-400.woff2") format("woff2");
+  src: url("/fonts/barlow-latin-400.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: "Arimo";
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/barlow-latin-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Barlow";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("/fonts/arimo-latin-700.woff2") format("woff2");
+  src: url("/fonts/barlow-latin-700.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* Inter (variabel skrift, vægt 100 til 900). Licens: SIL Open Font License, se /fonts/OFL-inter.txt. */
 @font-face {
-  font-family: "Inter";
+  font-family: "Barlow Condensed";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 700;
   font-display: swap;
-  src: url("/fonts/inter-latin.woff2") format("woff2");
+  src: url("/fonts/barlow-condensed-latin-700.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/barlow-condensed-latin-800.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Farverne er aflæst direkte fra PDF'erne */
+/* Farverne er aflæst direkte fra PDF'erne: Cozzes logofarve, den limegrønne og en varm, lys flade */
 :root {
-  --cv-red: #BB252B;
-  --cv-ink: #252525;
-  --cv-muted: #6B6B6B;
-  --cv-line: #E2E2E2;
-  --cv-desk: #F3F1F1;
-  --chat-ink: #1F2A27;
-  --chat-muted: #5D6B67;
-  --chat-green: #10A37F;
-  --chat-bubble: #E9F6F0;
-  --chat-bubble-line: #CFE9DD;
-  --chat-line: #E3E7E5;
-  --chat-bg: #F7F8F8;
+  --doc-brand: #336466;
+  --doc-lime: #C4C969;
+  --doc-ink: #1F2B2B;
+  --doc-muted: #5B6868;
+  --doc-line: #E2E6E3;
+  --doc-tint: #F2F4DF;
+  --doc-tint-line: #DDE2AE;
+  --doc-olive: #6F7428;
+  --doc-desk: #F6F3EA;
+  --doc-font: "Barlow", Arial, "Helvetica Neue", sans-serif;
+  --doc-head: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
 }
 
 /* Siderne ligger på en flade i dokumentets farve, og toppen står hvid ovenpå */
-body.doc-cv-page { background: var(--cv-desk); }
-body.doc-chat-page { background: var(--chat-bg); }
+body.doc-cv-page, body.doc-chat-page { background: var(--doc-desk); }
 .doc-main { padding: clamp(1rem, 3vw, 2.5rem) var(--gutter) 2.5rem; }
 @media (max-width: 30rem) { .doc-pdf { display: none; } }
 
@@ -57,130 +71,140 @@ body.doc-chat-page { background: var(--chat-bg); }
 /* ===== CV ===== */
 .cv {
   max-width: 62rem; margin: 0 auto; overflow: hidden;
-  background: #fff; color: var(--cv-ink); border-radius: 20px;
-  box-shadow: 0 1px 2px rgb(37 37 37 / .05), 0 18px 48px rgb(37 37 37 / .08);
-  font-family: "Arimo", Arial, "Helvetica Neue", sans-serif; font-size: 1rem; line-height: 1.5;
+  background: #fff; color: var(--doc-ink); border-radius: 20px;
+  box-shadow: 0 1px 2px rgb(31 43 43 / .05), 0 18px 48px rgb(31 43 43 / .08);
+  font-family: var(--doc-font); font-size: 1.0625rem; line-height: 1.5;
 }
 @media (max-width: 40rem) {
   .doc-cv-page .doc-main { padding-inline: 0; padding-top: 0; }
   .cv { border-radius: 0; box-shadow: none; }
 }
-.cv h1, .cv h2, .cv h3 { letter-spacing: -.01em; text-wrap: balance; }
-.cv a { color: inherit; text-decoration-color: rgb(37 37 37 / .35); text-underline-offset: 3px; }
-.cv a:hover { text-decoration-color: var(--cv-red); }
+.cv h1, .cv h2, .cv h3 { text-wrap: balance; }
+.cv a { color: inherit; text-decoration-color: rgb(31 43 43 / .35); text-underline-offset: 3px; }
+.cv a:hover { text-decoration-color: var(--doc-brand); }
 .cv strong { font-weight: 700; }
 
 /* Toppen: memojien og konfettien går helt ud til kanten, og overskriften står til højre for memojien.
    Teksten skalerer med billedet (cqw), så det ligner PDF'en. På smalle skærme står teksten under billedet. */
 .cv-hero { position: relative; container-type: inline-size; }
 .cv-hero-img { display: block; width: 100%; height: auto; }
-.cv-hero-text { position: absolute; left: 27.5%; right: 5%; top: 21%; }
-.cv-hero h1 { margin: 0 0 .3em; font-size: 3.75cqw; font-weight: 700; line-height: 1.16; max-width: 16em; }
-.cv-hero-sub { margin: 0; font-size: 1.8cqw; }
+.cv-hero-text { position: absolute; left: 26.8%; right: 3%; top: 26%; }
+.cv-hero h1 {
+  margin: 0 0 .25em; color: var(--doc-brand); font-family: var(--doc-head); font-weight: 800;
+  font-size: 4.2cqw; line-height: 1; text-transform: uppercase; letter-spacing: 0; max-width: 14.6em; text-wrap: wrap;
+}
+.cv-hero-sub { margin: 0; color: var(--doc-muted); font-size: 1.8cqw; }
 @container (max-width: 34rem) {
-  .cv-hero-img { height: 8.5rem; object-fit: cover; object-position: left top; }
-  .cv-hero-text { position: static; padding: 1rem clamp(1.25rem, 4vw, 3rem) 0; }
-  .cv-hero h1 { font-size: 1.6rem; }
-  .cv-hero-sub { font-size: 1rem; }
+  .cv-hero-img { height: 7.5rem; object-fit: cover; object-position: left top; }
+  .cv-hero-text { position: static; padding: .75rem clamp(1.25rem, 4vw, 3rem) 0; }
+  .cv-hero h1 { font-size: 1.9rem; }
+  .cv-hero-sub { font-size: 1.05rem; }
 }
 
 .cv-body { padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem); }
 .cv-id { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-top: 1.5rem; }
-.cv-name { margin: 0; font-size: clamp(1.75rem, 4vw, 2.15rem); font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
-.cv-pill { padding: .3rem .85rem; border-radius: 999px; background: var(--cv-red); color: #fff; font-size: .85rem; font-weight: 700; white-space: nowrap; }
-.cv-contact { display: flex; flex-wrap: wrap; gap: .4rem 1.75rem; margin: 1rem 0 0; font-size: .925rem; }
-.cv-intro { margin: 1.75rem 0 0; padding: .3rem 0 .3rem 1.1rem; border-left: 4px solid var(--cv-red); font-size: 1rem; line-height: 1.6; max-width: 56rem; }
-.cv-intro strong { color: var(--cv-red); }
+.cv-name { margin: 0; font-family: var(--doc-head); font-size: clamp(2rem, 4.5vw, 2.6rem); font-weight: 800; line-height: 1; text-transform: uppercase; }
+.cv-pill { padding: .3rem .9rem; border-radius: 999px; background: var(--doc-lime); color: var(--doc-brand); font-size: .9rem; font-weight: 700; white-space: nowrap; }
+.cv-contact { display: flex; flex-wrap: wrap; gap: .4rem 1.75rem; margin: .9rem 0 0; font-size: .95rem; }
+.cv-intro {
+  margin: 1.5rem 0 0; padding: .9rem 1.1rem; max-width: none;
+  background: var(--doc-tint); border-left: 4px solid var(--doc-brand); border-radius: 0 8px 8px 0;
+  font-size: 1.02rem; line-height: 1.6;
+}
+.cv-intro strong { color: var(--doc-brand); }
 
 .cv-cols { display: grid; gap: 2.25rem 3rem; margin-top: 2.25rem; }
 @media (min-width: 54rem) { .cv-cols { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
 .cv-main, .cv-side { display: grid; gap: 2.25rem; align-content: start; min-width: 0; }
-.cv h2 { margin: 0 0 1.1rem; padding-bottom: .45rem; border-bottom: 2px solid var(--cv-red); font-size: 1.2rem; font-weight: 700; }
-
-/* Erfaring: firmalogo til venstre, titel og dato på én linje, firmanavn i rød og bullets med røde firkanter */
-.cv-jobs { display: grid; gap: 1.6rem; }
-.cv-job { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); gap: 1rem; }
-.cv-logo { display: block; width: 2.75rem; height: 2.75rem; border-radius: 8px; object-fit: cover; }
-.cv-job-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 1rem; }
-.cv-job h3 { margin: 0; font-size: 1.05rem; font-weight: 700; }
-.cv-date { margin: 0; color: var(--cv-muted); font-size: .85rem; white-space: nowrap; }
-.cv-company { margin: 0 0 .45rem; color: var(--cv-red); font-weight: 700; font-size: .95rem; }
-.cv-bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; font-size: .95rem; }
-.cv-bullets li { position: relative; padding-left: 1.1rem; }
-.cv-bullets li::before { content: ""; position: absolute; left: 0; top: .55em; width: .4rem; height: .4rem; background: var(--cv-red); }
-
-/* Projekter med skærmbilleder fra heyOtto */
-.cv-projects { display: grid; gap: 1.75rem; }
-.cv-project h3 { margin: 0; font-size: 1.05rem; font-weight: 700; }
-.cv-project p { margin: .2rem 0 0; font-size: .95rem; }
-.cv-shots { display: grid; gap: .75rem; margin: .9rem 0 0; }
-.cv-shots-wide { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
-.cv-shots-pair { grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); }
-.cv-shots img {
-  display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top;
-  border: 1px solid var(--cv-line); border-radius: 10px; background: #fff;
-  box-shadow: 0 6px 18px rgb(37 37 37 / .07);
+.cv h2 {
+  margin: 0 0 1.1rem; padding-bottom: .35rem; border-bottom: 3px solid var(--doc-lime);
+  color: var(--doc-brand); font-family: var(--doc-head); font-size: 1.45rem; font-weight: 700; line-height: 1.1; text-transform: uppercase;
 }
-@media (max-width: 30rem) { .cv-shots-wide, .cv-shots-pair { grid-template-columns: 1fr; } }
+
+/* Erfaring: firmalogo til venstre, titel og dato på én linje, firmanavn i Cozzes farve og limegrønne punkter */
+.cv-jobs { display: grid; gap: 1.6rem; }
+.cv-job { display: grid; grid-template-columns: 2.9rem minmax(0, 1fr); gap: 1rem; }
+.cv-logo { display: block; width: 2.9rem; height: 2.9rem; border-radius: 9px; border: 2px solid var(--doc-line); object-fit: cover; }
+.cv-job-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 1rem; }
+.cv-job h3 { margin: 0; font-size: 1.15rem; font-weight: 700; line-height: 1.3; }
+.cv-date { margin: 0; color: var(--doc-muted); font-size: .9rem; white-space: nowrap; }
+.cv-company { margin: 0 0 .45rem; color: var(--doc-brand); font-weight: 600; font-size: 1.05rem; }
+.cv-bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; font-size: 1rem; }
+.cv-bullets li { position: relative; padding-left: 1.25rem; }
+.cv-bullets li::before { content: ""; position: absolute; left: 0; top: .45em; width: .6rem; height: .6rem; border-radius: 3px; background: var(--doc-lime); }
+.cv-side-job { margin: 1.4rem 0 0; color: var(--doc-muted); font-size: 1rem; }
+.cv-side-job strong { color: var(--doc-muted); }
+
+/* Projekt med skærmbilleder fra HeyOtto OS */
+.cv-project p { margin: 0; font-size: 1rem; }
+.cv-shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin: .9rem 0 0; }
+.cv-shots img {
+  display: block; width: 100%; height: 100%; aspect-ratio: 1.68; object-fit: cover; object-position: left top;
+  border: 1px solid var(--doc-line); border-radius: 10px; background: #fff;
+  box-shadow: 0 6px 18px rgb(31 43 43 / .07);
+}
+@media (max-width: 30rem) { .cv-shots { grid-template-columns: 1fr; } }
 
 /* Værktøjer: logo, navn og kategori i et gitter med to kolonner */
 .cv-tools { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
-.cv-tool { display: flex; align-items: center; gap: .65rem; min-width: 0; padding: .55rem .65rem; border: 2px solid var(--cv-line); }
+.cv-tool { display: flex; align-items: center; gap: .65rem; min-width: 0; padding: .55rem .7rem; border: 2px solid var(--doc-line); border-radius: 12px; }
 .cv-tool img { flex: none; width: 1.6rem; height: 1.6rem; object-fit: contain; }
 .cv-tool span { display: grid; min-width: 0; line-height: 1.25; }
-.cv-tool b { font-size: .9rem; }
-.cv-tool small { color: var(--cv-muted); font-size: .8rem; overflow-wrap: anywhere; }
-.cv-also { margin: .9rem 0 0; font-size: .925rem; }
-.cv-also span { color: var(--cv-muted); }
+.cv-tool b { font-size: .95rem; font-weight: 700; }
+.cv-tool small { color: var(--doc-muted); font-size: .85rem; overflow-wrap: anywhere; }
+.cv-also { margin: .9rem 0 0; font-size: .95rem; color: var(--doc-muted); }
 
-/* Sådan arbejder jeg: nummererede trin i røde firkanter */
-.cv-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; font-size: .925rem; }
+/* Sådan arbejder jeg: nummererede trin i små firkanter i Cozzes farve */
+.cv-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; font-size: .975rem; }
 .cv-steps li { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .75rem; }
 .cv-steps p, .plan p { margin: 0; }
-.cv-num { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; background: var(--cv-red); color: #fff; font-size: .8rem; font-weight: 700; }
+.cv-steps strong { color: var(--doc-brand); }
+.cv-num { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 4px; background: var(--doc-brand); color: #fff; font-size: .85rem; font-weight: 700; }
 
-.cv-edu { display: grid; gap: .9rem; font-size: .925rem; }
-.cv-edu p, .cv-lang { margin: 0; font-size: .925rem; }
+.cv-edu { display: grid; gap: .9rem; }
+.cv-edu p, .cv-lang { margin: 0; font-size: .975rem; }
 .cv-edu .cv-date { white-space: normal; }
 
-/* Foto og virksomhedens logo nederst i højre kolonne */
+/* Foto og Cozzes limegrønne logofelt nederst i højre kolonne */
 .cv-sign { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; }
-.cv-photo { display: block; width: 5.25rem; height: 5.25rem; border-radius: 16px; object-fit: cover; }
-.cv-maki { display: block; width: 5.25rem; height: 5.25rem; }
+.cv-photo, .cv-firma { display: block; width: 5.5rem; height: 5.5rem; border-radius: 16px; object-fit: cover; }
 
 /* ===== Ansøgning som chat ===== */
 .chat-doc {
-  max-width: 46rem; margin: 0 auto; color: var(--chat-ink);
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: .975rem; line-height: 1.6;
+  max-width: 46rem; margin: 0 auto; color: var(--doc-ink);
+  font-family: var(--doc-font); font-size: 1.0625rem; line-height: 1.6;
 }
-.chat-doc a { color: inherit; text-decoration-color: rgb(31 42 39 / .35); text-underline-offset: 3px; }
-.chat-doc a:hover { text-decoration-color: var(--chat-green); }
+.chat-doc a { color: inherit; text-decoration-color: rgb(31 43 43 / .35); text-underline-offset: 3px; }
+.chat-doc a:hover { text-decoration-color: var(--doc-brand); }
 
-/* Toppen: foto, navn, stillingen og en grøn status */
+/* Toppen: foto, navn, stillingen, en limegrøn status og Cozzes logo til højre */
 .chat-head {
   display: flex; align-items: center; gap: 1rem;
-  padding: 1rem 1.25rem; background: #fff; border: 1px solid var(--chat-line); border-radius: 18px;
+  padding: 1rem 1.5rem 1rem 1.25rem; background: #fff; border: 1px solid var(--doc-line); border-radius: 18px;
 }
-.chat-head-photo { flex: none; width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; }
-.chat-head > div { min-width: 0; }
-.chat-name { margin: 0; max-width: none; font-size: 1.3rem; font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
-.chat-role { margin: .1rem 0 0; color: var(--chat-muted); font-size: .85rem; line-height: 1.4; }
-.chat-status { display: flex; align-items: center; gap: .45rem; margin: .25rem 0 0; color: var(--chat-green); font-size: .85rem; font-weight: 600; }
-.chat-status::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: var(--chat-green); }
+.chat-head-photo { flex: none; width: 3.75rem; height: 3.75rem; border-radius: 50%; object-fit: cover; }
+.chat-head > div { flex: 1; min-width: 0; }
+.chat-name { margin: 0; max-width: none; color: var(--doc-brand); font-family: var(--doc-head); font-size: 1.75rem; font-weight: 700; line-height: 1.05; text-transform: uppercase; letter-spacing: 0; }
+.chat-role { margin: .15rem 0 0; color: var(--doc-muted); font-size: .9rem; line-height: 1.4; }
+.chat-status { display: flex; align-items: center; gap: .45rem; margin: .25rem 0 0; color: var(--doc-brand); font-size: .9rem; font-weight: 600; }
+.chat-status::before { content: ""; width: .6rem; height: .6rem; border-radius: 50%; background: var(--doc-lime); box-shadow: 0 0 0 3px #E9EDC4; }
+.chat-head-logo { flex: none; width: 6.5rem; height: auto; }
+@media (max-width: 34rem) { .chat-head-logo { display: none; } }
 
-/* Samtalen: Thomas til venstre i hvide bobler, Kasper til højre i grønne */
+/* Samtalen: Lærke til venstre i hvide bobler, Kasper til højre i limegrønne */
 .chat-log { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1.25rem; }
 .msg { display: flex; align-items: flex-end; gap: .75rem; }
+.msg-them { align-items: center; }
 .msg-me { justify-content: flex-end; padding-left: clamp(0rem, 6vw, 2.5rem); }
-.msg-avatar { flex: none; width: 2.25rem; height: 2.25rem; border-radius: 50%; object-fit: cover; }
+.msg-avatar { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%; object-fit: cover; }
 .bubble { min-width: 0; padding: .85rem 1.15rem; border-radius: 14px; }
-.msg-them .bubble { max-width: 33rem; background: #fff; border: 1px solid var(--chat-line); }
-.msg-me .bubble { background: var(--chat-bubble); border: 1px solid var(--chat-bubble-line); }
+.msg-them .bubble { max-width: 33rem; background: #fff; border: 1px solid var(--doc-line); }
+.msg-me .bubble { background: var(--doc-tint); border: 1px solid var(--doc-tint-line); }
 .bubble p { margin: 0 0 .75rem; }
 .bubble p:last-child { margin-bottom: 0; }
-.bubble-from { margin: 0 0 .3rem !important; font-size: .75rem; font-weight: 700; line-height: 1.3; }
-.msg-them .bubble-from { color: var(--cv-red); }
-.msg-me .bubble-from { color: var(--chat-green); }
+.bubble-from { margin: 0 0 .3rem !important; font-size: .78rem; font-weight: 700; line-height: 1.3; letter-spacing: .06em; text-transform: uppercase; }
+.msg-them .bubble-from { color: var(--doc-brand); }
+.msg-me .bubble-from { color: var(--doc-olive); }
 @media (max-width: 30rem) {
   .msg { gap: .5rem; }
   .msg-avatar { width: 1.75rem; height: 1.75rem; }
@@ -188,27 +212,29 @@ body.doc-chat-page { background: var(--chat-bg); }
 }
 
 /* 90-dages-planen som trin i et hvidt kort inde i boblen */
-.plan { list-style: none; margin: 0 0 .85rem; padding: .95rem 1rem; display: grid; gap: .8rem; background: #fff; border: 1px solid var(--chat-line); border-radius: 12px; }
-.plan li { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .7rem; }
-.plan-num { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--chat-green); color: #fff; font-size: .75rem; font-weight: 700; }
+.plan { list-style: none; margin: .85rem 0; padding: .4rem 1rem; display: grid; background: #fff; border: 1px solid var(--doc-tint-line); border-radius: 12px; }
+.plan li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: .75rem; padding: .7rem 0; }
+.plan li + li { border-top: 1px solid var(--doc-line); }
+.plan-num { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--doc-brand); color: #fff; font-size: .85rem; font-weight: 700; }
 .plan b { display: block; font-weight: 700; }
 .bubble .plan p { margin: 0; }
+.bubble .plan:last-child { margin-bottom: 0; }
 
-/* Bunden: skrivefeltet med kontaktoplysninger og en grøn send-knap, der åbner en mail */
+/* Bunden: skrivefeltet med kontaktoplysninger og en send-knap i Cozzes farve, der åbner en mail */
 .chat-compose { display: flex; align-items: center; gap: .75rem; margin-top: 2rem; }
 .chat-field {
   flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: .2rem .5rem; margin: 0;
-  padding: .8rem 1.25rem; background: #fff; border: 1px solid var(--chat-line); border-radius: 26px;
-  font-size: .85rem; color: var(--chat-muted);
+  padding: .8rem 1.25rem; background: #fff; border: 1px solid var(--doc-line); border-radius: 26px;
+  font-size: .9rem; color: var(--doc-muted);
 }
-.chat-field span { color: var(--chat-muted); }
+.chat-field span { color: var(--doc-muted); }
 .chat-send {
   flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%;
-  background: var(--chat-green); color: #fff; text-decoration: none;
+  background: var(--doc-brand); color: #fff; text-decoration: none;
   transition: transform 160ms var(--ease-out), background-color 150ms ease;
 }
 .chat-doc .chat-send, .chat-doc .chat-send:hover { color: #fff; }
-.chat-send:hover { background: #0E8F70; }
+.chat-send:hover { background: #274D4F; }
 @media (hover: hover) and (pointer: fine) { .chat-send:hover { transform: translateY(-1px); } }
 .chat-send:active { transform: scale(.95); }
 @media (prefers-reduced-motion: reduce) { .chat-send, .chat-send:hover, .chat-send:active { transform: none; } }
