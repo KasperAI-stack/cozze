@@ -12,7 +12,7 @@ En personlig landingpage til ansøgningen som marketingkoordinator i Cozzes mark
   - 404.html: siden, der vises, hvis adressen er forkert
   - css/styles.css: farver og design. Cozzes farver (petrol #274345 og limegrøn #C4C969) står øverst under `:root`.
   - js/main.js: små forbedringer, fx agentvælgeren i toppen og temaknappen
-  - assets/cozze-logo.svg: Cozzes logo i petrol (#274345)
+  - assets/cozze-logo.svg: Cozzes logo i deres grønne logofarve (#336466)
   - assets/og-image.jpg og og-image-en.jpg: billedet, der vises, når linket deles på LinkedIn eller i en mail
 - netlify.toml: fortæller Netlify, at site/ skal publiceres.
 

@@ -191,7 +191,7 @@ h3 { font-size: 1.125rem; font-weight: 600; letter-spacing: -.01em; margin: 0 0 
 .brand-mark { width: 28px; height: 28px; flex: none; }
 /* Kasper × Cozze: krydset står lille og dæmpet mellem memojien og logoet */
 .brand-x { color: var(--muted); font-size: 1rem; font-weight: 400; line-height: 1; }
-/* Logo: Cozzes logo som vektorgrafik (SVG) i Cozzes petrol, med gennemsigtig baggrund. Logoet er bredt (239 × 42),
+/* Logo: Cozzes logo som vektorgrafik (SVG) i deres grønne logofarve (#336466), med gennemsigtig baggrund. Logoet er bredt (800 × 141),
    så det står lavere end et kvadratisk logo for at fylde det samme. Det må krympe på smalle skærme (højden følger
    bredden), så det aldrig rammer knapperne i toppen. */
 .brand { min-width: 0; }
@@ -783,14 +783,14 @@ h1 {
 .footer-nav, .footer-contact { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.5rem; }
 .footer-icon { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; margin: -.75rem; }
 /* Hovedet og logoet deler bredden, så de altid er lige høje: hoved = (100 % - mellemrum) / (1 + logoets format).
-   Cozzes logo har formatet 239 / 42 = 5,69, så hovedet får (100 - 2) / 6,69 = 14,6 % af bredden. */
+   Cozzes logo har formatet 800 / 141 = 5,67, så hovedet får (100 - 2) / 6,67 = 14,7 % af bredden. */
 .footer-mark {
   container-type: inline-size;
   display: flex; align-items: flex-end; gap: 2cqw; margin-top: clamp(2.5rem, 6vw, 4.5rem);
 }
-.footer-head { width: 14.6cqw; height: 14.6cqw; flex: none; object-fit: contain; }
+.footer-head { width: 14.7cqw; height: 14.7cqw; flex: none; object-fit: contain; }
 .footer-logo {
-  flex: 1; aspect-ratio: 239 / 42; background: var(--ffg);
+  flex: 1; aspect-ratio: 800 / 141; background: var(--ffg);
   -webkit-mask: url("/assets/cozze-logo.svg") center / contain no-repeat;
   mask: url("/assets/cozze-logo.svg") center / contain no-repeat;
 }
